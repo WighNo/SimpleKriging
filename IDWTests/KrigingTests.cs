@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Core;
+﻿using Core;
 using IDW;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace KrigingTests
+namespace IDWTests
 {
     [TestClass]
     public class KrigingTests

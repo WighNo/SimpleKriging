@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Core;
+﻿using Core;
 using Core.Extensions;
 using Core.Interfaces;
 using Core.Loaders;
+using Core.Selectors;
 using IDW;
+using System;
+using System.Collections.Generic;
 
 namespace MapCalculator
 {
@@ -15,67 +14,28 @@ namespace MapCalculator
         [STAThread]
         private static void Main(string[] args)
         {
-            Console.WriteLine("Press Enter");
-            Console.ReadKey();
-
             ISelectorWithDialog fileSelector = new FileSelector();
             ISelectorWithDialog folderSelector = new FolderSelector();
-
-            /*
-             * 
-             * TODO для ковариационной функции взять расстояние до ближайшей точки
-             * ki = C(Ui - U); узнать, что такое "Ui" и "U"  
-             *
-             */
-
-            List<Point3D> points = Helpers.Get6Points();
-
-            Matrix matrix6x6 = new Matrix(points.Count);
-            Matrix matrix6x1 = new Matrix(6, 1);
-
-            double[] distances = points.GetDistance();
-            matrix6x6.Fill(distances);
-
-            SpaceBetweenMatrix();
-            DisplayMatrix(matrix6x6.ConvertToCovariance());
-
-            void DisplayMatrix(Matrix matrix)
-            {
-                for (int i = 0; i < matrix.Lines; i++)
-                {
-                    for (int j = 0; j < matrix.Columns; j++)
-                    {
-                        Console.Write($"{matrix.GetElement(i, j),10}");
-                    }
-
-                    Console.WriteLine();
-                }
-
-            }
-
-            void SpaceBetweenMatrix(int count = 1)
-            {
-                for (int i = 0; i < count; i++)
-                    Console.WriteLine();
-            }
-
-            double CalculateCovariance(double h)
-            {
-                return 1 - 1.5 * (h / 4141) + 0.5 * Math.Pow(h / 4141, 3);
-            }
-
-            /// Здесь необходимо заполнить названия файлов используя параметры командной строки, либо диалоги
+            
+            Console.ReadKey();
+            
             string filePoints = fileSelector.Select("Выберите файл с точками", "Text Document|*.txt");
-            string fileGrid = fileSelector.Select("Выберите файл сетки", "Text Document|*.txt");
-            string fileMap = folderSelector.Select("Выберите место для сохранение результата");
+            string fileGrid = fileSelector.Select("Выберите файл сетки", "Json File|*.json");
+            //string fileMap = folderSelector.Select("Выберите место для сохранение результата");
 
-            /// Там надо реализовать методы загрузки параметров в каком либо виде, например точки X,Y,Z, парамкетры сетки как минимум/максимум по X|Y и количество узлов по X|Y
+            /// Там надо реализовать методы загрузки параметров в каком либо виде, например точки X,Y,Z,
+            /// параметры сетки как минимум/максимум по X|Y и количество узлов по X|Y
             ILoader<List<Point3D>> pointsLoader = new PointsLoader(filePoints);
-            ILoader<Point3D[][]> gridLoader = new GridLoader(fileGrid);
+            ILoader<Point3D[][]> gridLoader = new JsonGridLoader(fileGrid);
 
-            //TODO Реализовать загрузку
-            //List<Point3D> points = pointsLoader.Load();
+            List<Point3D> points = pointsLoader.Load();
             Point3D[][] map = gridLoader.Load();
+
+            /*Matrix matrix = new Matrix(points.Count);
+            matrix.Fill(points.GetDistance());
+            matrix.ConvertToCovariance(new SphericalVariogram());*/
+
+            Console.ReadKey();
 
             /// В каких узлах считаем
             bool[][] mask = Helpers.AllNodes(map);
@@ -88,9 +48,8 @@ namespace MapCalculator
                 return;
 
             //TODO реализовать сохранение
-            ISaver<Point3D[][]> mapSaver = new DefaultMapSaver(fileMap);
-            mapSaver.Save(map);
-
+            /*ISaver<Point3D[][]> mapSaver = new DefaultMapSaver(fileMap);
+            mapSaver.Save(map);*/
         }
     }
 }

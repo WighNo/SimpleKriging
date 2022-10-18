@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Core.Extensions
 {
@@ -21,10 +20,6 @@ namespace Core.Extensions
             return result;
         }
 
-        public static Matrix GetDistanceMatrix(this List<Point3D> points)
-        {
-            Matrix result = new Matrix(points.Count);
-            throw new NotImplementedException();
-        }
+
     }
 }

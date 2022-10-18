@@ -6,31 +6,32 @@ namespace Core
     /// <summary>
     /// Основа для точек в 3D, в идеале я хочу тут увидеть операции сравнения, нахождения расстояний, перегрузку операторов и тд
     /// </summary>
-    ///
-    /// double distance = Math.Sqrt(Math.Pow(Xb - Xa, 2) + Math.Pow(Yb - Ya, 2))
-    /// Xa и Ya - координаты этой точки
-    /// Xb и Yb - координаты второй точки
     public class Point3D
     {
-        public Point3D(double x, double y, double z)
+        public Point3D()
         {
-            X = x;
-            Y = y;
-            Z = z;
+            Position = Vector3.Zero;
         }
 
-        public double X { get; set; }
+        public Point3D(double x, double y, double z)
+        {
+            Position = new Vector3(x, y, z);
+        }
 
-        public double Y { get; set; }
-
-        public double Z { get; set; }
+        public Point3D(Vector3 position)
+        {
+            Position = position;
+        }
+        
+        public Vector3 Position { get; set; }
 
         public double CalculateDistance(Point3D targetPoint)
         {
-            double distance = Math.Sqrt(Math.Pow(targetPoint.X - X, 2) + Math.Pow(targetPoint.Y - Y, 2));
+            Vector3 result = targetPoint.Position - Position;
+            double distance = Math.Sqrt(Math.Pow(result.X, 2) + Math.Pow(result.Y, 2));
             return distance;
         }
-
+        
         public double[] CalculateDistance(List<Point3D> otherPoints)
         {
             double[] result = new double[otherPoints.Count];
@@ -41,6 +42,12 @@ namespace Core
             }
 
             return result;
+        }
+
+        public static Point3D operator -(Point3D first, Point3D second)
+        {
+            Vector3 position = first.Position - second.Position;
+            return new Point3D(position);
         }
     }
 }

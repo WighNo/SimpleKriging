@@ -55,31 +55,20 @@ namespace Core
             }
         }
 
-        public Matrix ConvertToCovariance()
+        public void InteractionWithData(Action<int, int> action)
         {
-            for (int i = 0; i < _lines; i++)
+            for(var i = 0; i < _lines; i++)
             {
-                for (int j = 0; j < _columns; j++)
+                for(var j = 0; j < _columns; j++)
                 {
-                    double h = _storage[i, j];
-                    _storage[i, j] = Math.Round(Covariance(h), 2);
+                    action?.Invoke(i, j);
                 }
             }
-
-            return this;
         }
 
-        private double Covariance(double h)
+        public double Covariance(double h, double range)
         {
-            return 1 - 1.5 * (h / 4141) + 0.5 * Math.Pow(h / 4141, 3);
-        }
-        
-        public void Invert()
-        {
-            if (_lines != _columns)
-                throw new InvalidOperationException("Обратная матрица существует только для квадратных матриц");
-            
-            throw new NotImplementedException();
+            return 1 - 1.5 * (h / range) + 0.5 * Math.Pow(h / range, 3);
         }
 
         public static Matrix operator *(Matrix source, Matrix target)

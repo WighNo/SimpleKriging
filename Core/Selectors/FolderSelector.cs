@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Core.Interfaces;
 
-namespace Core
+namespace Core.Selectors
 {
     public class FolderSelector : ISelectorWithDialog
     {

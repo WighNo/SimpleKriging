@@ -6,6 +6,7 @@ namespace Core
     /// <summary>
     /// Вспомогательный класс, по хорошему было бы создать базовые классы для списка точек и карт, тогда эти методы уйдут в типы
     /// </summary>
+    //TODO Distribute functionality into classes
     public static class Helpers
     {
         public static List<Point3D> GeneratePoints()
@@ -142,92 +143,6 @@ namespace Core
                 new Point3D(320759.6, 848807.5, 0.57),
                 new Point3D(320926.3, 848351.6, 0.58),
                 new Point3D(315776.2, 847515.7, 0.58)
-            };
-        }
-
-        public static List<Point3D> Get3Points()
-        {
-            return new List<Point3D>
-            {
-                new Point3D(317845.2, 861486, 0.2),
-                new Point3D(319055.2, 861414.8, 0.27),
-                new Point3D(320327, 862052.9, 0.28)
-            };
-        }
-        
-        public static List<Point3D> Get6Points()
-        {
-            return new List<Point3D>
-            {
-                new Point3D(317845.2, 861486, 0.2),
-                new Point3D(319055.2, 861414.8, 0.27),
-                new Point3D(320327, 862052.9, 0.28),
-                new Point3D(319037.6, 860832.8, 0.29),
-                new Point3D(320673.2, 860675.6, 0.29),
-                new Point3D(320242.1, 860271.5, 0.29)                
-            };
-        }
-
-        public static List<Point3D> Get12Points()
-        {
-            return new List<Point3D>
-            {
-                new Point3D(317845.2, 861486, 0.2),
-                new Point3D(319055.2, 861414.8, 0.27),
-                new Point3D(320327, 862052.9, 0.28),
-                new Point3D(319037.6, 860832.8, 0.29),
-                new Point3D(320673.2, 860675.6, 0.29),
-                new Point3D(320242.1, 860271.5, 0.29),
-                new Point3D(322358.9, 859888.9, 0.29),
-                new Point3D(323994.8, 862455, 0.29),
-                new Point3D(322444.3, 863255, 0.29),
-                new Point3D(323582.4, 861493.7, 0.29),
-                new Point3D(319628.8, 861376.6, 0.29),
-                new Point3D(323187, 860733.3, 0.29)
-            };
-        }
-        
-        public static List<Point3D> Get36Points()
-        {
-            return new List<Point3D>()
-            {
-                new Point3D(317845.2, 861486, 0.2),
-                new Point3D(319055.2, 861414.8, 0.27),
-                new Point3D(320327, 862052.9, 0.28),
-                new Point3D(319037.6, 860832.8, 0.29),
-                new Point3D(320673.2, 860675.6, 0.29),
-                new Point3D(320242.1, 860271.5, 0.29),
-                new Point3D(322358.9, 859888.9, 0.29),
-                new Point3D(323994.8, 862455, 0.29),
-                new Point3D(322444.3, 863255, 0.29),
-                new Point3D(323582.4, 861493.7, 0.29),
-                new Point3D(319628.8, 861376.6, 0.29),
-                new Point3D(323187, 860733.3, 0.29),
-                new Point3D(323202.8, 862361.6, 0.29),
-                new Point3D(324401.4, 862872.5, 0.29),
-                new Point3D(324528.6, 863629, 0.29),
-                new Point3D(324332.2, 862397.2, 0.29),
-                new Point3D(324645.1, 862124.3, 0.29),
-                new Point3D(323220.2, 859901.5, 0.29),
-                new Point3D(324857.3, 861625.6, 0.29),
-                new Point3D(323679.2, 859517.5, 0.29),
-                new Point3D(324902.2, 860816.5, 0.29),
-                new Point3D(325335.4, 861225.7, 0.29),
-                new Point3D(324528.2, 859532.9, 0.29),
-                new Point3D(324925.7, 859968.5, 0.29),
-                new Point3D(325318.5, 860400.2, 0.29),
-                new Point3D(325488.7, 859866.8, 0.29),
-                new Point3D(324915.4, 859125.2, 0.29),
-                new Point3D(323836.5, 863936.6, 0.29),
-                new Point3D(324321.9, 861766.7, 0.29),
-                new Point3D(324468.5, 861137.3, 0.29),
-                new Point3D(325844.2, 859539.1, 0.29),
-                new Point3D(324449.4, 859099.9, 0.29),
-                new Point3D(324156.3, 858669.6, 0.29),
-                new Point3D(324699.5, 858669.3, 0.29),
-                new Point3D(325194.1, 858695.9, 0.29),
-                new Point3D(319773.7, 848505.4, 0.29),
-                new Point3D(320364.5, 847965.6, 0.29)
             };
         }
 
