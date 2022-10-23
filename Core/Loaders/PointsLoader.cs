@@ -1,5 +1,6 @@
 ﻿using Core.Interfaces;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 
 namespace Core.Loaders
@@ -51,7 +52,7 @@ namespace Core.Loaders
 
         private double StringToDouble(string value)
         {
-            return double.Parse(value.Replace('.', ','));
+            return double.Parse(value, CultureInfo.InvariantCulture);
         }
     }
 }

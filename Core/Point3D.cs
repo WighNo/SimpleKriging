@@ -25,6 +25,17 @@ namespace Core
         
         public Vector3 Position { get; set; }
 
+        public bool InRange(double minX, double minY, double maxX, double maxY)
+        {
+            double x = Position.X;
+            double y = Position.Y;
+
+            if (x < minX || y < minY || x > maxX || y > maxY)
+                return false;
+            
+            return true;
+        }
+        
         public static Point3D operator -(Point3D first, Point3D second)
         {
             Vector3 position = first.Position - second.Position;

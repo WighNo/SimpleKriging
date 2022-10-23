@@ -26,7 +26,17 @@ namespace Core.Matrix
             Fill(source);
         }
 
-        public double GetElement(int line, int column) => _storage[line][column];
+        public double GetElement(int row, int column) => _storage[row][column];
+
+        public bool SetElement(int row, int column, double value)
+        {
+            if (row > _storage.Length || column > _storage[row].Length)
+                return false;
+            
+            _storage[row][column] = value;
+            
+            return true;
+        }
 
         private void CreateEmptyStorage()
         {
@@ -36,24 +46,11 @@ namespace Core.Matrix
             }
         }
         
-        public void Fill(double[] source)
-        {
-            int size = Rows * Columns;
-
-            if (size != source.Length)
-                throw new InvalidOperationException();
-
-            for (int index = 0; index < Rows; index++)
-            {
-                for (int i = 0; i < Columns; i++)
-                {
-                    _storage[index][i] = source[i + index * Rows];
-                }
-            }
-        }
-
         public void Fill(double[][] source)
         {
+            if (source.Length != _storage.Length)
+                throw new ArgumentException();
+            
             for (int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < Columns; j++)
@@ -74,12 +71,13 @@ namespace Core.Matrix
             }
         }
 
+        [Obsolete("Дорого")]
         public static Matrix operator *(Matrix source, Matrix target)
         {
             if (source.Columns != target.Rows)
                 throw new InvalidOperationException("Невозможно умножить матрицы");
             
-            double[][] result = new double[source.Rows][];
+            double[][] result = new double[target.Rows][];
             
             for (int i = 0; i < source.Rows; i++)
             {
@@ -94,7 +92,7 @@ namespace Core.Matrix
                 }
             }
 
-            Matrix matrix = new Matrix(target.Columns, target.Rows);
+            Matrix matrix = new Matrix(target.Rows, target.Columns);
             matrix.Fill(result);
             
             return matrix;

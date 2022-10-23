@@ -1,4 +1,6 @@
-﻿namespace Core
+﻿using System.Globalization;
+
+namespace Core
 {
     public struct Vector3
     {
@@ -17,7 +19,7 @@
 
         public static Vector3 Zero => new Vector3(0, 0, 0);
 
-        public override string ToString() => $"({X}, {Y}, {Z})";
+        public override string ToString() => $"{X} {Y} {Z.ToString(CultureInfo.InvariantCulture)}";
         
         public static Vector3 operator -(Vector3 first, Vector3 second)
         {
