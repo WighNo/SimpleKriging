@@ -25,25 +25,6 @@ namespace Core
         
         public Vector3 Position { get; set; }
 
-        public double CalculateDistance(Point3D targetPoint)
-        {
-            Vector3 result = targetPoint.Position - Position;
-            double distance = Math.Sqrt(Math.Pow(result.X, 2) + Math.Pow(result.Y, 2));
-            return distance;
-        }
-        
-        public double[] CalculateDistance(List<Point3D> otherPoints)
-        {
-            double[] result = new double[otherPoints.Count];
-
-            for (int i = 0; i < otherPoints.Count; i++)
-            {
-                result[i] = CalculateDistance(otherPoints[i]);
-            }
-
-            return result;
-        }
-
         public static Point3D operator -(Point3D first, Point3D second)
         {
             Vector3 position = first.Position - second.Position;

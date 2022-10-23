@@ -9,20 +9,22 @@ namespace Core.Loaders
     public class JsonGridLoader : ILoader<Point3D[][]>
     {
         private readonly string _loadPath;
+
+        private readonly ArgumentException _stepArgumentException =
+            new ArgumentException("Grid spacing in X or Y cannot be less than or equal to zero");
         
         public JsonGridLoader(string loadPath)
         {
             _loadPath = loadPath;
         }
         
-        //TODO Add Exception Descriptions
         public Point3D[][] Load()
         {
             JsonGridSettings gridSettings = ReadJson();
             Point3D[][] result = null;
 
-            int stepX = gridSettings.StepX <= 0 ? throw new ArgumentException() : gridSettings.StepX;
-            int stepY = gridSettings.StepY <= 0 ? throw new ArgumentException() : gridSettings.StepY;
+            int stepX = gridSettings.StepX <= 0 ? throw _stepArgumentException : gridSettings.StepX;
+            int stepY = gridSettings.StepY <= 0 ? throw _stepArgumentException : gridSettings.StepY;
             
             result = new Point3D[stepX][];
             

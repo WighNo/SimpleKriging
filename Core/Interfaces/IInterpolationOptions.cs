@@ -2,5 +2,6 @@
 {
     public interface IInterpolationOptions
     {
+        int ChunkSize { get; }
     }
 }

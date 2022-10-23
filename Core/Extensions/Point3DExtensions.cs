@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Core.Extensions
 {
@@ -19,7 +20,25 @@ namespace Core.Extensions
 
             return result;
         }
+        
+        public static double[] CalculateDistance(this Point3D point, List<Point3D> otherPoints)
+        {
+            double[] result = new double[otherPoints.Count];
 
+            for (int i = 0; i < otherPoints.Count; i++)
+            {
+                result[i] = CalculateDistance(point, otherPoints[i]);
+            }
+
+            return result;
+        }
+        
+        public static double CalculateDistance(this Point3D point, Point3D targetPoint)
+        {
+            Vector3 result = targetPoint.Position - point.Position;
+            double distance = Math.Sqrt(Math.Pow(result.X, 2) + Math.Pow(result.Y, 2));
+            return distance;
+        }
 
     }
 }
