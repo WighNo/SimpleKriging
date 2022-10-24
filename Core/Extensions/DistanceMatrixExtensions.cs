@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Core.Extensions
 {
-    public static class Point3DExtensions
+    public static class DistanceMatrixExtensions
     {
         private static double[][] _matrixDistance = new double[1][];
         
@@ -44,13 +42,6 @@ namespace Core.Extensions
             }
 
             return _matrixDistance;
-        }
-
-        public static double CalculateDistance(this Point3D point, Point3D targetPoint)
-        {
-            Vector3 result = targetPoint.Position - point.Position;
-            double distance = Math.Sqrt(Math.Pow(result.X, 2) + Math.Pow(result.Y, 2));
-            return distance;
         }
         
         private static bool MatrixDistanceIsValid(int rows, int columns)

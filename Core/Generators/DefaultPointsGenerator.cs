@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Core.Interfaces;
 
-namespace Core
+namespace Core.Generators
 {
-    /// <summary>
-    /// Вспомогательный класс, по хорошему было бы создать базовые классы для списка точек и карт, тогда эти методы уйдут в типы
-    /// </summary>
-    //TODO Distribute functionality into classes
-    public static class Helpers
+    public class DefaultPointsGenerator : IGenerator<List<Point3D>>
     {
-        public static List<Point3D> GeneratePoints()
+        public List<Point3D> Generate()
         {
             return new List<Point3D>
             {
@@ -144,45 +140,6 @@ namespace Core
                 new Point3D(320926.3, 848351.6, 0.58),
                 new Point3D(315776.2, 847515.7, 0.58)
             };
-        }
-
-        public static bool[][] AllNodes(Point3D[][] map)
-        {
-            var mask = new bool[map.Length][];
-            for (var i = 0; i < map.Length; i++)
-            {
-                mask[i] = new bool[map[i].Length];
-                for (var j = 0; j < map[i].Length; j++)
-                {
-                    mask[i][j] = true;
-                }
-            }
-
-            return mask;
-        }
-
-        public static Point3D[][] GenerateParam()
-        {
-            var nx = 460;
-            var ny = 800;
-            var xStep = 50.0;
-            var yStep = 50.0;
-            var xMin = 309000.0;
-            var yMin = 827000.0;
-            var xMax = xMin + (nx - 1) * xStep;
-            var yMax = yMin + (ny - 1) * yStep;
-
-            var map = new Point3D[nx][];         
-            for (var i = 0; i < nx; i++)
-            {
-                map[i] = new Point3D[ny];
-                for (var j = 0; j < ny; j++)
-                {
-                    map[i][j] = new Point3D(xMin + xStep * i, yMin + yStep * j, double.NaN);
-                }
-            }
-
-            return map;
         }
     }
 }

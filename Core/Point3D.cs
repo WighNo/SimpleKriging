@@ -25,6 +25,13 @@ namespace Core
         
         public Vector3 Position { get; set; }
 
+        public double CalculateDistance(Point3D targetPoint)
+        {
+            Vector3 result = targetPoint.Position - Position;
+            double distance = Math.Sqrt(Math.Pow(result.X, 2) + Math.Pow(result.Y, 2));
+            return distance;
+        }
+        
         public bool InRange(double minX, double minY, double maxX, double maxY)
         {
             double x = Position.X;

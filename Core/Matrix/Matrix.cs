@@ -2,30 +2,43 @@
 
 namespace Core.Matrix
 {
-    public class Matrix : MatrixBase
+    public class Matrix
     {
         private readonly double[][] _storage;
 
-        public Matrix(int size) : base(size, size)
+        public Matrix(int size)
         {
+            Rows = size;
+            Columns = size;
+            
             _storage = new double[Rows][];
             CreateEmptyStorage();
         }
         
-        public Matrix(int rows, int columns) : base(rows, columns)
+        public Matrix(int rows, int columns)
         {
+            Rows = rows;
+            Columns = columns;
+            
             _storage = new double[Rows][];
             CreateEmptyStorage();
         }
         
-        public Matrix(double[][] source) : base(source.Length, source[0].Length)
+        public Matrix(double[][] source)
         {
+            Rows = source.Length;
+            Columns = source[0].Length;
+            
             _storage = new double[Rows][];
             
             CreateEmptyStorage();
             Fill(source);
         }
 
+        public int Rows { get; }
+        
+        public int Columns { get; }
+        
         public double GetElement(int row, int column) => _storage[row][column];
 
         public bool SetElement(int row, int column, double value)
@@ -97,5 +110,24 @@ namespace Core.Matrix
             
             return matrix;
         }
+        
+        public static Matrix operator /(Matrix mat, double val)
+        {
+            double[][] result = new double[mat.Rows][];
+            
+            for (int i = 0; i < mat.Rows; i++)
+            {
+                result[i] = new double[mat.Columns];
+                
+                for (int j = 0; j < mat.Columns; j++)
+                {
+                    result[i][j] = mat.GetElement(i, j)/val;
+
+                }
+            }
+            
+            return new Matrix(result);
+        }
+
     }
 }

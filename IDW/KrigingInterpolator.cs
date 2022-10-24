@@ -25,7 +25,7 @@ namespace IDW
             int positionPointer = 0;
             
             Prepare(points, options);
-
+            
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
@@ -42,43 +42,13 @@ namespace IDW
                 CalculateWeightMatrices(startIndex, endIndex, ref positionPointer, validPoints, points);
                 RestoreZ(points);
 
-                /*
-                for (int j = startIndex; j < endIndex; j++)
-                {
-                    int pointIndex = j - startIndex;
-                    
-                    Point3D point3D = validPoints[positionPointer];
-                    Matrix matrix = _matrixBuffer[pointIndex];
-                    matrix.Fill(point3D.GetDistance(points, points.Count, 1));
-                    
-                    _weightMatrices.Add(point3D, MatrixMath.MultiplicationBySecondMatrix(_gridPointDistanceMatrix, matrix));
-                    
-                    positionPointer++;
-                }
-                */
-
-                /*foreach (KeyValuePair<Point3D, Matrix> pair in _weightMatrices)
-                {
-                    Point3D point = pair.Key;
-                    Matrix matrix = pair.Value;
-
-                    double x = point.Position.X;
-                    double y = point.Position.Y;
-                    double z = 0;
-
-                    for (int index = 0; index < points.Count; index++)
-                    {
-                        z += points[index].Position.Z * matrix.GetElement(index, 0);
-                    }
-
-                    point.Position = new Vector3(x, y, z);
-                }*/
-                
-                Console.WriteLine($"{i} | {iterationCount}");
+                Console.WriteLine($"Итерация {i + 1} из {iterationCount}");
             }
 
             stopwatch.Stop();
-            Console.WriteLine(stopwatch.Elapsed);
+            
+            Console.WriteLine();
+            Console.WriteLine($"Время выполнения: {stopwatch.Elapsed}");
             
             return true;
         }
@@ -139,6 +109,12 @@ namespace IDW
         {
             _gridPointDistanceMatrix = new Matrix(points.Count);
             _gridPointDistanceMatrix.Fill(points.GetDistance());
+            
+            _gridPointDistanceMatrix.InteractionWithData((i, j) =>
+            {
+                _gridPointDistanceMatrix.SetElement(i, i, 1d);
+            });
+            
             _gridPointDistanceMatrix = _gridPointDistanceMatrix.Inverse();
         }
 

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text;
 using Core.Interfaces;
 
-namespace Core
+namespace Core.Savers
 {
     public class DefaultMapSaver : ISaver<Point3D[][]>
     {
@@ -17,8 +14,7 @@ namespace Core
 
         public DefaultMapSaver(string savePath)
         {
-            _savePath = Path.Combine(Directory.GetCurrentDirectory(), "output.xyz");
-            _savePath = Path.ChangeExtension(_savePath, "xyz");
+            _savePath = savePath;
         }
         
         public void Save(Point3D[][] saveObject)
@@ -41,8 +37,6 @@ namespace Core
             {
                 streamWriter.Write(_stringBuilder);
             }
-
-            Process.Start(_savePath);
         }
     }
 }

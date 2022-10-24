@@ -2,7 +2,7 @@
 
 namespace Core.Extensions
 {
-    public static class MatrixExtensions
+    public static class InverseMatrixExtension
     {
         //TODO Add Error Description
         public static Matrix.Matrix Inverse(this Matrix.Matrix matrix)
@@ -26,7 +26,7 @@ namespace Core.Extensions
                         b[j] = 0.0;
                 }
 
-                double[] x = HelperSolve(disassembledMatrix, b);
+                double[] x = Processing(disassembledMatrix, b);
 
                 for (int j = 0; j < matrixRows; j++)
                 {
@@ -121,7 +121,7 @@ namespace Core.Extensions
             return result;
         }
         
-        private static double[] HelperSolve(double[][] luMatrix, double[] b)
+        private static double[] Processing(double[][] luMatrix, double[] b)
         {
             int n = luMatrix.Length;
             double[] x = new double[n];

@@ -21,25 +21,8 @@ namespace Core.Loaders
         public Point3D[][] Load()
         {
             JsonGridSettings gridSettings = ReadJson();
-            Point3D[][] result = null;
 
-            int stepX = gridSettings.StepX <= 0 ? throw _stepArgumentException : gridSettings.StepX;
-            int stepY = gridSettings.StepY <= 0 ? throw _stepArgumentException : gridSettings.StepY;
-            
-            result = new Point3D[stepX][];
-            
-            Vector3 area = gridSettings.MaximumPosition - gridSettings.MinimumPosition;
-            Vector3 nodeSize = new Vector3(area.X / stepX, area.Y / stepY, area.Z);
-            
-            for (int i = 0; i < stepX; i++)
-            {
-                for (int j = 0; j < stepY; j++)
-                {
-                    
-                }
-            }
-            
-            return result;
+            return gridSettings.Points;
         }
 
         private JsonGridSettings ReadJson()
@@ -56,15 +39,7 @@ namespace Core.Loaders
         
         private class JsonGridSettings
         {
-            public Vector3 MinimumPosition { get; set; }
-            
-            public Vector3 MaximumPosition { get; set; }
-            
-            public int StepX { get; set; }
-            
-            public int StepY { get; set; }
-
-            public List<Point3D> InterpolatePoints { get; set; }
+            public Point3D[][] Points { get; set; }
 
             public override string ToString()
             {

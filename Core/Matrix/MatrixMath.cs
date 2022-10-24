@@ -4,6 +4,8 @@ namespace Core.Matrix
 {
     public static class MatrixMath
     {
+        #region Multiplication
+
         private static double[][] _multiplicationBuffer = new double[1][];
         
         public static Matrix MultiplicationBySecondMatrix(Matrix first, Matrix second)
@@ -36,7 +38,7 @@ namespace Core.Matrix
             {
                 for (int j = 0; j < second.Columns; j++)
                 {
-                    for (int k = 0; k < second.Rows; k++)
+                    for (int k = 0; k < first.Columns; k++)
                     {
                         _multiplicationBuffer[i][j] += first.GetElement(i, k) * second.GetElement(k, j);
                     }
@@ -76,9 +78,11 @@ namespace Core.Matrix
             {
                 for (int j = 0; j < _multiplicationBuffer[i].Length; j++)
                 {
-                    _multiplicationBuffer[i][j] = 0f;
+                    _multiplicationBuffer[i][j] = 0;
                 }
             }
         }
+        
+        #endregion
     }
 }

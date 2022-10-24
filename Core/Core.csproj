@@ -65,10 +65,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultMapSaver.cs" />
-    <Compile Include="Extensions\MatrixExtensions.cs" />
-    <Compile Include="Extensions\PointDistanceExtensions.cs" />
-    <Compile Include="Helpers.cs" />
+    <Compile Include="Extensions\InverseMatrixExtension.cs" />
+    <Compile Include="Extensions\DistanceMatrixExtensions.cs" />
+    <Compile Include="Generators\AllNodesMaskMapGenerator.cs" />
+    <Compile Include="Generators\DefaultParamGenerator.cs" />
+    <Compile Include="Generators\DefaultPointsGenerator.cs" />
+    <Compile Include="Interfaces\IGenerator.cs" />
     <Compile Include="Interfaces\IInterpolationOptions.cs" />
     <Compile Include="Interfaces\IInterpolator.cs" />
     <Compile Include="Interfaces\ILoader.cs" />
@@ -77,15 +79,12 @@
     <Compile Include="Loaders\JsonGridLoader.cs" />
     <Compile Include="Loaders\PointsLoader.cs" />
     <Compile Include="Matrix\Matrix.cs" />
-    <Compile Include="Matrix\MatrixBase.cs" />
-    <Compile Include="Matrix\MatrixBuffer.cs" />
     <Compile Include="Matrix\MatrixMath.cs" />
     <Compile Include="Point3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Savers\DefaultMapSaver.cs" />
     <Compile Include="Selectors\FileSelector.cs" />
-    <Compile Include="Selectors\FolderSelector.cs" />
-    <Compile Include="Variogram\SphericalVariogram.cs" />
-    <Compile Include="Variogram\VariogramBase.cs" />
+    <Compile Include="Selectors\SaveFolderSelector.cs" />
     <Compile Include="Vector3.cs" />
   </ItemGroup>
   <ItemGroup>
